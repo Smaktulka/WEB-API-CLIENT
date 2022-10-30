@@ -1,0 +1,43 @@
+﻿@model Fridges
+@{ Layout = "_Layout"; ViewBag.Title = "Get fridge by id";}
+
+<h2>Get fridge by id<a asp-action="GetFridges" class="btn btn-sm btn-primary">Back</a></h2>
+<h3>@ViewBag.StatusCode</h3>
+<form method="post">
+	<div class="form-group" id="myForm">
+		<label for="Id">Id:</label>
+		<input class="form-control" name="Id" asp-for="Id"/>
+		<span asp-validation-for="Id"></span>
+	</div>
+	<div class="text-center panel-body">
+		<input type="submit" class="btn btn-sm btn-primary" value="Find" />
+	</div>
+	@section scripts{
+
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+</form>
+
+@if (Model != null)
+{
+	<h2>Fridge</h2>
+	<table class="table table-sm table-striped table-bordered m-2">
+		<thed>
+			<tr>
+				<td>Id</td>
+				<td>Name</td>
+				<td>Model Id</td>
+				<td>Owner_Name</td>
+			</tr>
+		</thed>
+		<tbody>
+			<tr>
+				<td>@Model.Id</td>
+				<td>@Model.Name</td>
+				<td>@Model.ModelId</td>
+				<td>@Model.Owner_Name</td>
+			</tr>
+		</tbody>
+	</table>
+}

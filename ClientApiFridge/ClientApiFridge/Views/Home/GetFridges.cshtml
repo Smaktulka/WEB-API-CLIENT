@@ -1,0 +1,99 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<FridgesDto>
+@{ Layout = "_Layout"; ViewBag.Title = "All Fridges";}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<input type="hidden" id="hiddenFridgeId"/>
+<input type="hidden" id="row"/>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">WARNING!</h3>
+                <a asp-action="GetFridges" data-dismiss="modal">&times;</a>  
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to Remove this Fridge?</h4>
+                <span></span>
+
+            </div>
+            <div class="modal-footer">
+                <a asp-action="GetFridges" data-dismiss="modal">Cancel</a>
+                <button class="btn btn-success" onclick="DeleteEmployee()">Confirm</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        var ConfirmDelete = function (fridgeId, btn) {
+            $("#hiddenFridgeId").val(fridgeId);
+            $("#myModal").modal('show');
+
+        }
+        var DeleteEmployee = function () {
+            var empId = $("#hiddenFridgeId").val();
+            $.post("DeleteFridge",
+            {
+                Id: empId
+            });
+            $("#myModal").modal("hide");
+            $('#myModal').on('hidden.bs.modal', function()
+            {
+                location.reload();
+            });
+        }
+    </script>
+    <script>
+        var CallSp() = function (fridgeId) {
+            debugger
+            allert(fridgeId)
+            $.post("StoredProcedure",
+                {
+                    Id: fridgeId
+                });
+        }
+    </script>
+}
+
+
+<h2>All Fridges</h2>
+<a asp-action="Index" class="btn btn-sm btn-primary"> Back to previous page</a>
+<a asp-action="GetFridgeById" class="btn btn-sm btn-secondary"> Get fridge by id</a>
+
+<table class="table table-sm table-striped table-bordered m-2" id="frigeTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Model Id</th>
+            <th>Owner_Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var fridge in Model)   
+        {
+            <tr>
+                <td>@fridge.Id</td>
+                <td>@fridge.Name</td>
+                <td>@fridge.ModelId</td>
+                <td>@fridge.Owner_Name</td>
+                <td><a asp-action="UpdateFridge" asp-route-id="@fridge.Id" class="btn btn-outline-primary">Update</a></td>
+                <td>                    
+                    <button class="btn btn-danger" onclick="ConfirmDelete('@fridge.Id', this)">Delete</button>
+                </td> 
+                <td><a asp-action="GetFridgeProducts" asp-route-id="@fridge.Id" class="btn btn-outline-primary">Show Products</a> </td>
+            </tr>
+        }   
+    </tbody>
+</table>
+<a asp-action="CreateFridge" class="btn btn-sm btn-secondary"> Create new fridge</a>

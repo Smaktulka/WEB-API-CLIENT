@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!doctype html></>
+<html>
+<head>
+<title> Hello Asp.Net MVC Core</title>
+<meta charset = "utf-8"/>
+<meta name="viewport" content="width=device-width"/>
+</head>
+
+<body>
+    <div>
+        <h2>
+            Вітаю Свет!
+        </h2>
+        <p>Гэта мой першы праект у ASP.NET<p/>
+            <p>Перад Вамі вэб-прылада "склад халадзільнікаў"<p/>
+        <p>Табліца з усімі халадзільнікамі: 
+            <a asp-action="GetFridges" class="btn btn-sm btn-primary">Get all fridges</a></p>
+        <p>Стварыць новы халадзільнік: 
+            <a asp-action="CreateNewFridge" class="btn btn-sm btn-primary">Create new fridge</a></p>
+        <p>Прагляд прадуктаў: 
+            <a asp-action="GetProducts" class="btn btn-sm btn-primary">Get all products</a>
+        </p>
+    </div>
+</body>
+</html>
+
