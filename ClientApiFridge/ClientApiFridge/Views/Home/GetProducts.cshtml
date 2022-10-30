@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<ProductsDto>
+@{ Layout = "_Layout"; ViewBag.Title = "Get all products";}
+
+<h2>All products</h2>
+<a asp-action="Index" class="btn btn-sm btn-primary">Back to previous page</a>
+
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Default Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Default_Quantity</td>
+                <td><a asp-action="UpdateProduct" asp-route-id="@product.Id">Update</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

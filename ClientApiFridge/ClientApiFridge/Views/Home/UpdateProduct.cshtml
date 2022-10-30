@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model ProductsDto
+@{
+    Layout = "_Layout"; ViewBag.Title = "Updating product";
+}
+
+<h2>Update a product <a asp-action="GetProducts" class="btn btn-sm btn-secondary">Back</a></h2>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <input class="form-control" asp-for="Id" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Default_Quantity">Default Quantity</label>
+        <input class="form-control" asp-for="Default_Quantity" />
+        <span asp-validation-for="Default_Quantity"></span>
+    </div>
+   <div class="text-center panel-body">
+        <input type="submit" class="btn btn-sm btn-primary" value="Update"/>
+    </div>
+    @section scripts{
+
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+</form>
+@if (ViewBag.Result == "Success")
+{
+    <h2>Fridge</h2>
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Default Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.Name</td>
+                <td>@Model.Default_Quantity</td>
+            </tr>
+        </tbody>
+    </table>
+}
